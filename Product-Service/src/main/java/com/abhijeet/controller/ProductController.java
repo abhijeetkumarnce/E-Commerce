@@ -3,6 +3,7 @@ package com.abhijeet.controller;
 import com.abhijeet.entities.Product;
 import com.abhijeet.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,5 +38,23 @@ public class ProductController {
     @PostMapping("/")
     public Product saveNewProduct(@RequestBody Product product){
         return productService.addProduct(product);
+    }
+
+    @DeleteMapping("/id/{productId}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long productId){
+        productService.deleteProduct(productId);
+        return ResponseEntity.ok("Product is deleted successfully...");
+    }
+
+    @PutMapping("/id/{productId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long productId, @RequestBody Product product){
+        Product updateProduct = productService.getOneProductById(productId);
+
+        updateProduct.setProductName(product.getProductName());
+        updateProduct.setProductDescription(product.getProductDescription());
+        updateProduct.setProductRating(product.getProductRating());
+        productService.addProduct(updateProduct);
+
+        return ResponseEntity.ok(updateProduct);
     }
 }

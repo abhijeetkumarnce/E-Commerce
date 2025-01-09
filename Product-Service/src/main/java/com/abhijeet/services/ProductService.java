@@ -15,4 +15,6 @@ public interface ProductService {
     List<Product> getAllProductsByRating(double productRating);
 
     Product addProduct(Product product);
+
+    void deleteProduct(Long productId);
 }
