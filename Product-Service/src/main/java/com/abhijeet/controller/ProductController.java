@@ -3,6 +3,7 @@ package com.abhijeet.controller;
 import com.abhijeet.entities.Product;
 import com.abhijeet.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +50,10 @@ public class ProductController {
     @PutMapping("/id/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long productId, @RequestBody Product product){
         Product updateProduct = productService.getOneProductById(productId);
+
+        if (updateProduct == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
 
         updateProduct.setProductName(product.getProductName());
         updateProduct.setProductDescription(product.getProductDescription());
