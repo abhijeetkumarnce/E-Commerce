@@ -8,8 +8,6 @@ public interface UserService {
 
     List<Users> getAllUsers();
 
-    List<Users> getAllUsersByUserRole(String userRole);
-
     Users getUserByUserId(Long userId);
 
     Users getUserByUserName(String userName);
