@@ -31,7 +31,7 @@ public class UserController {
         return userService.getUserByUserName(userName);
     }
 
-    @PostMapping("/")
+    @PostMapping("/register")
     public Users addNewUser(@RequestBody Users user){
         return userService.addNewUser(user);
     }
@@ -55,5 +55,10 @@ public class UserController {
         userService.addNewUser(updateUser);
 
         return ResponseEntity.ok(updateUser);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody Users users){
+        return userService.verify(users);
     }
 }

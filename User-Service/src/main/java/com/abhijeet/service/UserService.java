@@ -15,4 +15,6 @@ public interface UserService {
     Users addNewUser(Users user);
 
     void deleteUser(Long userId);
+
+    String verify(Users users);
 }
